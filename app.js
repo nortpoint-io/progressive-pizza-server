@@ -110,7 +110,7 @@ router.post('/subscribe', subscribeHandler);
 
 
 app.use(cors({
-    origin: ['http://localhost:3000']
+    origin: ['http://nortpoint-io.github.io']
 }));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
