@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    link(rel='stylesheet', href='stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='stylesheets/styles.css')
+  body
+    div.container
+      div.row
+        div.col-md-8.col-md-offset-2
+          h3 Apps subscriptions
+          table.table.table-striped.subscriptions-table
+            thead
+              tr
+                th Subscription date
+                th Subscription user
+                th Subscription id
+                th Action
+            tbody
+              each sub_data, sub_id in SUBSCRIPTIONS
+                tr
+                  td #{sub_data.date}
+                  td #{sub_data.userData.email}
+                  td #{sub_data.id}
+                  td.text-center
+                    button.btn.btn-xs.btn-default Send message
+        div.col-md-8.col-md-offset-2
+          form(action="/", method='POST')
+            h3 Send message to device
+            div.form-group(class=error && responseError ? "has-error": "")
+              input.form-control(type='text', name='registration-id', id='registration-id', placeholder='Device registration id', required='true')
+              div.help-block(class=error && responseError ? "" : "hidden") #{errorMsg}
+            div.form-group
+              input.form-control(type='text', name='message', id='message', placeholder='message', required='true')
+            div.form-group
+              input.form-control(type='text', name='title', id='title', placeholder='Message title', required='true')
+
+            p.bg-danger(class=error ? "" : "hidden") #{errorMsg}
+            p.bg-success(class=success ? "" : "hidden") #{successMsg}
+            button.btn.btn-success(type='submit') Send message
+
+    script(src='javascripts/jquery-3.1.1.min.js')
+    script(src='javascripts/bootstrap.min.js')
+    script(src='javascripts/site.js')

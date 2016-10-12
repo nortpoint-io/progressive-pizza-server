@@ -1,0 +1,9 @@
+.table.subscriptions-table {
+  table-layout: fixed;
+  word-wrap: break-word;
+  word-break: break-all;
+
+  td {
+    width: 50%:
+  }
+}
