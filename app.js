@@ -13,8 +13,6 @@ const router = express.Router();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-
-const FIREBASE_AUTHORIZATION_KEY = 'AIzaSyCb9ysSZxINYbX6QjruMT4wF85Mywvxi2U';
 let SUBSCRIPTIONS = {};
 
 
@@ -74,9 +72,9 @@ let sendMessageHandler = function(req, res) {
         return;
     }
 
-    webPush.setGCMAPIKey(FIREBASE_AUTHORIZATION_KEY);
+    webPush.setGCMAPIKey(process.env.FIREBASE_KEY);
     webPush.setVapidDetails(
-      'mailto:gbednarski@centuria.pl',
+      'mailto:' + process.env.MAIL,
       vapidKeys.publicKey,
       vapidKeys.privateKey
     );
@@ -110,7 +108,7 @@ router.post('/subscribe', subscribeHandler);
 
 
 app.use(cors({
-    origin: ['https://pizza.nortpoint.io']
+    origin: [process.env.CORS]
 }));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
